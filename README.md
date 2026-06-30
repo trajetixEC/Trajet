@@ -30,6 +30,14 @@ npm run db:seed
 npm run dev
 ```
 
+En Windows, si PowerShell bloquea `npm.ps1`, usa `npm.cmd`.
+
+Despues de instalar Docker/WSL por primera vez, reinicia Windows y ejecuta:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\start-trajet.ps1
+```
+
 Frontend: `http://localhost:5173`
 
 API: `http://localhost:4000/api`
