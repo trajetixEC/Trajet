@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: trajet-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: trajet
+      POSTGRES_USER: trajet
+      POSTGRES_PASSWORD: trajet_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - trajet-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trajet -d trajet"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./backend
+    container_name: trajet-api
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env.example
+    environment:
+      DATABASE_URL: postgresql://trajet:trajet_dev_password@postgres:5432/trajet?schema=public
+      CORS_ORIGIN: http://localhost:5173
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  trajet-postgres:
