@@ -7,7 +7,7 @@ TRAJET es una plataforma SaaS web para couriers: gestion de ordenes, destinatari
 - Frontend: React + Vite.
 - Backend: Node.js + Express + Socket.IO.
 - Base de datos: PostgreSQL con Prisma ORM.
-- Nube: preparada para desplegar en AWS, Google Cloud o Azure mediante contenedores.
+- Produccion: preparada para VPS Hostinger con Docker Compose, Nginx, PostgreSQL y API interna.
 - SaaS multi-tenant: todas las entidades principales pertenecen a una organizacion.
 - Logo y favicon: `frontend/public/trajet-logo.png` y `frontend/public/favicon.png`.
 - Seguridad: JWT, roles y permisos por usuario.
@@ -57,3 +57,16 @@ API: `http://localhost:4000/api`
 ## Variables
 
 Copia `backend/.env.example` a `backend/.env` y ajusta credenciales para produccion.
+
+## Produccion en VPS
+
+Para produccion real con base de datos persistente usa Docker Compose:
+
+```bash
+cp .env.production.example .env
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
+Guia completa: `DEPLOY_HOSTINGER.md`.
+
+La app publica queda en el puerto `80`, la API se sirve por `/api` y PostgreSQL queda privado dentro de Docker.
