@@ -71,8 +71,29 @@ Cambia obligatoriamente:
 - `JWT_SECRET`, minimo 32 caracteres.
 - `TRAJET_ADMIN_EMAIL`
 - `TRAJET_ADMIN_PASSWORD`
+- `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS` y `SMTP_FROM` para enviar bienvenida y codigo de verificacion.
 
 No subas `.env` a GitHub.
+
+## 3.1. Configurar correo SMTP
+
+Para AWS se recomienda Amazon SES:
+
+1. Verifica tu dominio en Amazon SES.
+2. Crea credenciales SMTP en SES.
+3. Si tu cuenta SES esta en sandbox, solicita salida a produccion.
+4. Configura `.env`:
+
+```bash
+SMTP_HOST=email-smtp.us-east-1.amazonaws.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=TU_USUARIO_SMTP_SES
+SMTP_PASS=TU_PASSWORD_SMTP_SES
+SMTP_FROM=TRAJET <no-reply@tu-dominio.com>
+```
+
+Sin SMTP en produccion, el registro no podra enviar el codigo de activacion.
 
 ## 4. Levantar produccion
 
@@ -159,6 +180,6 @@ Cuando tengas mas clientes:
 - HTTPS activo.
 - `.env` fuera de GitHub.
 - Admin privado configurado.
+- SMTP probado para registro y verificacion de correo.
 - WhatsApp con credenciales reales si vas a enviar notificaciones.
 - Probar registro, login, crear orden, guia, manifiesto, mapa y cierre de sesion.
-

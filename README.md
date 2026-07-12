@@ -11,6 +11,7 @@ TRAJET es una plataforma SaaS web para couriers: gestion de ordenes, destinatari
 - SaaS multi-tenant: todas las entidades principales pertenecen a una organizacion.
 - Logo y favicon: `frontend/public/trajet-logo.png` y `frontend/public/favicon.png`.
 - Seguridad: JWT, roles y permisos por usuario.
+- Registro real: bienvenida por correo SMTP, codigo de verificacion y activacion de cuenta.
 - Operacion: CRUD de remitentes/destinatarios, ordenes con guia automatica y manifiestos por una o varias guias.
 
 ## Acceso administrador
